@@ -6,7 +6,7 @@
   "description": "my app",
   "proxy": "http://localhost:8000"
    "scripts": {
-    "start": "node index.js" // Update this line to match your entry point
+    "start": "node index.js"
   },
 ,
   "main": "index.js",
