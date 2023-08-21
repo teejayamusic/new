@@ -1,0 +1,58 @@
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import Sidebar from './Sidebar'
+import { url } from '../utils/CloudinaryService'
+import Songcard from '../Componenets/Songcard'
+import { makeAuthenticatedGETRequest } from '../utils/serverHelpers';
+import {Howl, Howler} from "howler";
+import songContext from '../Context/Songcontext';
+import HomePage from './HomePage';
+
+
+function Mymusic() {
+
+    const [songData, setSongData] = useState([]);
+const [soundPlayed, setSoundPlayed]=useState(null)
+const playSound =(songSrc)=>{
+    if (soundPlayed){
+        soundPlayed.stop()
+    }
+    let sound = new Howl({
+        src: [songSrc],
+        html5: true
+
+      });
+      setSoundPlayed(sound);
+      console.log(sound);
+      sound.play();
+}
+
+    
+
+    useEffect(() => {
+        const getData = async () => {
+            const response = await makeAuthenticatedGETRequest(
+                "/song/get/mysongs"
+            );
+            setSongData(response.data);
+        };
+        getData();
+    }, []);
+
+   
+
+  return (
+    <HomePage>
+    <div className='flex h-full w-full bg-gray-900'>
+    
+
+      <div className="w-full">
+                {songData.map((item) => {
+                    return <Songcard info={item} playSound={playSound} />;
+                })}
+            </div>
+    </div>
+    </HomePage>
+  )
+}
+
+export default Mymusic

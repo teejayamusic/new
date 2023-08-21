@@ -1,0 +1,51 @@
+.background {
+    background-image: url(../Images/cool-background.png);
+    height: 756px;
+}
+
+.login{
+    border: 1px solid white;
+    
+}
+
+.create{
+    font-size: 100px;
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgba(255, 255, 255, 0); /* Set the text color to transparent */
+    -webkit-text-stroke: 1px #a7db2e; /* Set the white stroke width and color */
+}
+
+
+.createe{
+    font-size: 100px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.next:hover{
+    cursor: pointer;
+    
+}
+
+.sidebar{
+    background-image: url(../Images/cool-background.png);
+    background-size: cover;
+background-repeat: no-repeat
+;
+}
+
+
+.bg{
+    background-image: url(../Images/pop.png);
+    background-size: cover ;
+    background-repeat: no-repeat;
+}
+
+
+@media screen and (max-width:800px){
+    .songwid{
+      position: absolute; 
+    bottom: 0;  
+height: 100px;
+    }
+}

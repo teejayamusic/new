@@ -1,0 +1,38 @@
+.main{
+   
+    height: 100vh;
+    background: #485563;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+       
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.maincontent{
+    display: grid;
+    height: 97%;
+    width: 97%;
+  
+  background-color: rgb(12, 11, 11);
+  grid-template-columns: 7rem auto 20rem;
+}
+
+
+.mid {
+    scrollbar-width: 30px;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-track{
+    background-color: rgb(20, 20, 20);
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(65, 64, 64);
+    border-radius: 5px;
+  
+    background-clip: content-box;
+}

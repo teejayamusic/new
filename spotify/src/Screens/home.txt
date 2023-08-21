@@ -1,0 +1,144 @@
+import React, { useState } from 'react'
+import { Howl , Howler } from 'howler';
+import "../Componenets/login.css"
+import { Icon } from '@iconify/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { useCookies } from 'react-cookie';
+import Sidebar from './Sidebar';
+import { useRef,useContext } from 'react';
+import songContext from '../Context/Songcontext';
+import { makeAuthenticatedPOSTRequest } from '../utils/serverHelpers';
+
+
+
+
+
+
+
+function HomePage({children}) {
+
+
+  const [soundPlayed,setSoundPlayed]=useState(null)
+
+  const playSound =(songSrc)=>{
+    if (soundPlayed){
+        soundPlayed.stop()
+    }
+    let sound = new Howl({
+        src: [songSrc],
+        html5: true
+  
+      });
+      setSoundPlayed(sound);
+      console.log(sound);
+      sound.play();
+  }
+  
+
+  const {
+    currentSong,
+    setCurrentSong,
+
+    isPaused,
+    setIsPaused,
+} = useContext(songContext);
+
+
+
+
+
+
+const changeSong = (songSrc) => {
+    if (soundPlayed) {
+        soundPlayed.stop();
+    }
+    let sound = new Howl({
+        src: [songSrc],
+        html5: true,
+    });
+    setSoundPlayed(sound);
+    sound.play();
+    setIsPaused(false);
+};
+
+
+
+
+
+
+
+const firstUpdate = useRef(true);
+
+const pauseSound = () => {
+    soundPlayed.pause();
+};
+
+const togglePlayPause = () => {
+    if (isPaused) {
+        playSound();
+        setIsPaused(false);
+    } else {
+        pauseSound();
+        setIsPaused(true);
+    }
+};
+
+
+
+
+
+
+  const [cookies, setCookie] = useCookies(["token"]);
+  return (
+    <div className='h-full w-full  bg-gray-900 flex overflow-x-hidden '>
+<Sidebar />
+
+<div className='bg-gray-900 w-3/4  '>
+  <div className="navbar flex flex-row justify-between ">
+
+    <input className='bg-gray-300 p-2 h-12 w-96 rounded-3xl mt-3 ml-4   ' type="text" placeholder='Search for Songs, Artists , Playlists ...' />
+   <img className='rounded-full h-12 w-12 mt-3 ml-2 '  src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+  
+  </div>
+  <div className="cards flex flex-wrap gap-16">
+
+
+<Cards title='Pop' songs=''  />
+
+    
+    
+    <Cards title='Rnb' songs=''  />
+
+<Cards title='Rnb' songs=''  />
+<Cards title='EDM' songs=''  />
+<Cards title='Accoustic' songs=''  />
+</div>
+  </div>
+
+<div className='bg-gray-800 h-full  w-1/4'>
+<h1 className='text-white'>Name</h1>
+<div onClick={togglePlayPause}>
+<Icon  className="hover:cursor-pointer"   onClick={togglePlayPause}  icon={isPaused?"mdi:play" :"material-symbols:pause" }color="white" width="30" height="30"  />
+</div>
+</div>
+    </div>
+  )
+}
+
+
+const Cards= ({title,songs})=>{
+  return(
+    <div className='bg h-40 w-40 rounded-3xl mt-3 ml-3 p-4'>
+      <div className='border-t border-solid w-full mt-20'> 
+      <h1 className='mt-0   text-white text-2xl'>{title}</h1>
+      <p className='text-white ml-6'>{songs}</p>
+      </div>
+
+
+
+    </div>
+  )
+}
+
+export default HomePage
